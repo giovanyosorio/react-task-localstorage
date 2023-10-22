@@ -22,12 +22,22 @@ function App() {
       done: false
     }
   ])
+  function createTask(taskName){
+    if(!tasksItems.find((task) => task.name === taskName))
+    {
+      setTasksItems([...tasksItems, {id: tasksItems.length + 1, name: taskName, done: false}])
+    }
+    if(taskName === ""){
+      setTasksItems([...tasksItems ])
+    }
+   
+  }
 
 
 
   return (
     <>
-      <TaskCreator/>
+      <TaskCreator createTask={createTask}/>
       <table>
         <thead>
           <tr>

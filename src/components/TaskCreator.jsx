@@ -7,7 +7,7 @@ export default function TaskCreator({createTask}) {
     const handleSubmit = (e) => {
        e.preventDefault()
         createTask(newTask)
-       localStorage.setItem('task',newTask)
+      // localStorage.setItem('task',newTask)
        setnewTask("")
         console.log(newTask)
     }

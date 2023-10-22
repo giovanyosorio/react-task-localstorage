@@ -2,26 +2,10 @@
 import TaskCreator  from './components/TaskCreator.jsx'
 import './App.css'
 import {useState} from "react"
-
+import { useEffect } from 'react'
 function App() {
 
-  const [tasksItems, setTasksItems] = useState([
-    {
-      id: 1,
-      name: 'Task 1',
-      done: false
-    },
-    {
-      id: 2,
-      name: 'Task 2',
-      done: true
-    },
-    {
-      id: 3,
-      name: 'Task 3',
-      done: false
-    }
-  ])
+  const [tasksItems, setTasksItems] = useState([])
   function createTask(taskName){
     if(!tasksItems.find((task) => task.name === taskName))
     {
@@ -33,7 +17,16 @@ function App() {
    
   }
 
-
+  useEffect(() => {
+    let data= localStorage.getItem("tasks")
+    if(data){
+      setTasksItems(JSON.parse(data))
+    }
+  }, [])
+  useEffect(() => {
+    console.log(tasksItems)
+    localStorage.setItem("tasks",JSON.stringify(tasksItems))
+  } , [tasksItems])
 
   return (
     <>

@@ -3,6 +3,7 @@ import TaskCreator  from './components/TaskCreator.jsx'
 import './App.css'
 import {useState} from "react"
 import { useEffect } from 'react'
+import TaskTable from './components/TaskTable.jsx'
 function App() {
 
   const [tasksItems, setTasksItems] = useState([])
@@ -16,7 +17,14 @@ function App() {
     }
    
   }
-
+  function toggleTask(task){
+    setTasksItems(tasksItems.map((t) => (t.id === task.id ? {...t, done: !t.done} : t)))
+  }
+  function deleteTask(taskId){
+    const taskToDelete = tasksItems.filter((task) => task.id !== taskId)
+  
+    setTasksItems(taskToDelete)
+  }
   useEffect(() => {
     let data= localStorage.getItem("tasks")
     if(data){
@@ -31,22 +39,8 @@ function App() {
   return (
     <>
       <TaskCreator createTask={createTask}/>
-      <table>
-        <thead>
-          <tr>
-            <th>Task</th>
-            <th>Done</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasksItems.map((task) => (
-            <tr key={task.id}>
-              <td>{task.name}</td>
-              <td>{task.done ? 'Yes' : 'No'}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <TaskTable  tasks={tasksItems} toggleTask={toggleTask} deleteTask={deleteTask}/>
+
     </>
   )
 }

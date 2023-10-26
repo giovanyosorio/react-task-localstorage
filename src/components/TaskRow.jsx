@@ -7,7 +7,6 @@ const TaskRow = ({ task,toggleTask }) => {
         <td>{task.name}</td>
         <td>{task.done ? 'Yes' : 'No'}</td>
         <td> <input type='checkbox' checked={task.done} onChange={()=>toggleTask(task)}/></td>
-        <td> <button onClick={()=>deleteTask(task)}>Eliminar</button></td>
     </tr>
     );
 };

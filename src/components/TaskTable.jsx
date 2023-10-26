@@ -9,7 +9,7 @@ function TaskTable({ tasks,deleteTask, toggleTask,showCompleted =false}) {
         tasks.
         filter(task => task.done === doneValue).
         map((task) => (
-            <TaskRow key={task.id} toggleTask={toggleTask} task={task} deleteTask={deleteTask}/>
+            <TaskRow key={task.id} toggleTask={toggleTask} task={task} />
         )))
     }
     return (
